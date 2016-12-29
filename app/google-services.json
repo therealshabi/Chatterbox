@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "730079458840",
+    "firebase_url": "https://lapit-a8d0e.firebaseio.com",
+    "project_id": "lapit-a8d0e",
+    "storage_bucket": "lapit-a8d0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730079458840:android:4dfc9f71e7bb547a",
+        "android_client_info": {
+          "package_name": "therealshabi.technolifestyle.com.lapit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730079458840-9rus2r12vp6scmkd3o3882hj9sldqt2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "therealshabi.technolifestyle.com.lapit",
+            "certificate_hash": "C6290C7CA1A072169CD7B6E15FB6BDE98CDA0C82"
+          }
+        },
+        {
+          "client_id": "730079458840-2ea8f745ch2i1kqtcknp054pve6ojgqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtNtxruQHe5aAeGt4VGvjPgyWt7Ga3jdA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730079458840-2ea8f745ch2i1kqtcknp054pve6ojgqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:layout_height="match_parent"
+    tools:context="therealshabi.technolifestyle.com.lapit.RegisterActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/RegisterActivityAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/RegisterActivityToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_action_name"
+            app:title="Register"
+            app:titleTextColor="@android:color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/RegisterActivityRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/RegisterActivityAppBarLayout"
+        android:background="@color/colorAccent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/RegisterActivityImageView"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/camera" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/EditTextLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RegisterActivityRelativeLayout"
+        android:layout_marginTop="28dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/RegisterActivityDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/input_outline"
+            android:hint="Display Name.."
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/RegisterActivityEmailId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_outline"
+            android:hint="Email.."
+            android:inputType="textEmailAddress"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/RegisterActivityPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_outline"
+            android:hint="Password.."
+            android:inputType="textPassword"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/RegisterActivityGetStartedButton"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:text="GET STARTED"
+            android:textAlignment="center"
+            android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
