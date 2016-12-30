@@ -70,6 +70,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/SignInActivityEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -80,6 +81,7 @@
             android:padding="12dp" />
 
         <EditText
+            android:id="@+id/SignInActivityPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

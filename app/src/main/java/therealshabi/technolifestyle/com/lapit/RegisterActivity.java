@@ -2,11 +2,13 @@ package therealshabi.technolifestyle.com.lapit;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +17,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,6 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mPassword;
     EditText mEmail;
     Uri selectedImage;
+    Uri url;
+    Map<String, Object> user = new HashMap<>();
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,27 +80,27 @@ public class RegisterActivity extends AppCompatActivity {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = mDisplayName.getText().toString();
-                String password = mPassword.getText().toString();
-                String email = mEmail.getText().toString();
-                String id = mRoot.push().getKey();
-                Map<String, Object> user = new HashMap<>();
-                user.put("Display Name", username);
-                user.put("Email", email);
-                user.put("Password", password);
-                DatabaseReference userChild = mRoot.child(id);
-                userChild.updateChildren(user);
-                //Upload Profile Pic
-                uploadFile(email);
+               uploadFile();
             }
         });
     }
 
-    private void uploadFile(String email) {
+    private void uploadFile() {
+        user.clear();
+        count=0;
+        final String username = mDisplayName.getText().toString().trim();
+        final String password = mPassword.getText().toString();
+        final String email = mEmail.getText().toString();
+        //final String id = mRoot.push().getKey();
+
+        user.put("Email", email);
+        user.put("Password", password);
+
+
         if (selectedImage != null) {
             //displaying a progress dialog while upload is going on
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Registering..");
+            progressDialog.setMessage("Registering..");
             progressDialog.show();
 
             StorageReference userImage = mStorage.child("Users").child(email);
@@ -101,8 +109,13 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+                            url = taskSnapshot.getDownloadUrl();
+                            user.put("URL",""+url);
                             Toast.makeText(getApplicationContext(), "Profile Created Successfully", Toast.LENGTH_LONG).show();
+                            DatabaseReference userChild = mRoot.child(username);
+                            userChild.setValue(user);
                             startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -116,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please choose a valid Image", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,5 +150,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

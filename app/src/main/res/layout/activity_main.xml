@@ -7,4 +7,22 @@
     android:background="@color/colorPrimary"
     tools:context="therealshabi.technolifestyle.com.lapit.MainActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePic"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:src="@drawable/ic_camera_alt_black_24dp"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/displayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="16dp"
+        android:text="Welcome, Shahbaz"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+
 </RelativeLayout>
