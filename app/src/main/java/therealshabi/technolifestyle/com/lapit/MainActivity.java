@@ -1,9 +1,12 @@
 package therealshabi.technolifestyle.com.lapit;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView mProfilePic;
     Uri uri;
     TextView mDisplayText;
+    Button mChatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +29,23 @@ public class MainActivity extends AppCompatActivity {
         mDisplayText = (TextView) findViewById(R.id.displayName);
         String url = getIntent().getStringExtra("URL");
         String name = getIntent().getStringExtra("Name");
-        mDisplayText.setText("Welcome, "+name);
+        SharedPreferences share = getSharedPreferences("Share_Chatterbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putString("URL", url);
+        editor.putString("Name", name);
+        editor.commit();
+        editor.apply();
+        mDisplayText.setText("Welcome, " + name);
         uri = Uri.parse(url);
+        mChatter = (Button) findViewById(R.id.starting);
         Picasso.with(getBaseContext()).load(uri).into(mProfilePic);
+
+        mChatter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RoomActivity.class));
+            }
+        });
 
     }
 
@@ -55,4 +73,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }*/
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

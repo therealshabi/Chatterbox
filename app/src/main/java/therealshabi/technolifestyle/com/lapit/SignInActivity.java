@@ -61,20 +61,20 @@ public class SignInActivity extends AppCompatActivity {
                         Iterator<DataSnapshot> itr = i.iterator();
                         while(itr.hasNext()) {
                             DataSnapshot data = itr.next();
-                            String user = data.getKey();
+                            //String user = data.getKey();
                             Iterable<DataSnapshot> i1 = data.getChildren();
                             Iterator<DataSnapshot> itr1 = i1.iterator();
                             while (itr1.hasNext()) {
-                                //String name = itr1.next().getValue().toString();
+                                String name = itr1.next().getValue().toString();
                                 if ((itr1.next()).getValue().toString().equals(email)) {
                                     if (itr1.next().getValue().toString().equals(password)) {
                                         String uri = itr1.next().getValue().toString();//"https://firebasestorage.googleapis.com/v0/b/lapit-a8d0e.appspot.com/o/Users%2Fshahbaz.h96%40gmail.com?alt=media&token=179a9bb8-c168-426d-b63d-0f24308131b3";
                                         Toast.makeText(getBaseContext(), "Sign In Successful", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                         intent.putExtra("URL", uri);
-                                        intent.putExtra("Name",user);
-                                        startActivity(intent);
+                                        intent.putExtra("Name",name);
                                         finish();
+                                        startActivity(intent);
                                     }
                                     else{
                                         break;

@@ -60,7 +60,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/input_outline"
-            android:hint="User Name.."
+            android:hint="Display Name.."
             android:padding="12dp" />
 
         <EditText

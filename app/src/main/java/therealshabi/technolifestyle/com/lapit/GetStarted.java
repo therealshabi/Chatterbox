@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class GetStarted extends AppCompatActivity {
 
     Button mSignIn, mRegister;
@@ -17,6 +19,9 @@ public class GetStarted extends AppCompatActivity {
 
         mSignIn = (Button) findViewById(R.id.GetStartedActivitySignIn);
         mRegister = (Button) findViewById(R.id.GetStartedActivityRegister);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
 
         mSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
