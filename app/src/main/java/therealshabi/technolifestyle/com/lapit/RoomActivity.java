@@ -1,5 +1,7 @@
 package therealshabi.technolifestyle.com.lapit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,6 +32,7 @@ public class RoomActivity extends AppCompatActivity {
     Toolbar toolbar;
     SwipeRefreshLayout mRefresh;
     FirebaseRecyclerAdapter<Rooms, RoomHolder> firebaseRecyclerAdapter;
+    public static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class RoomActivity extends AppCompatActivity {
         mRefresh = (SwipeRefreshLayout) findViewById(R.id.refresh);
         toolbar = (Toolbar) findViewById(R.id.RoomActivityToolbar);
         setSupportActionBar(toolbar);
+
+        mContext = RoomActivity.this;
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -100,9 +105,9 @@ public class RoomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Rooms newRoom = new Rooms();
-                        newRoom.setRoomName(room.getText().toString());
-                        newRoom.setRoomType(roomType.getText().toString());
-                        mRoot.push().setValue(newRoom);
+                        newRoom.setRoomName(room.getText().toString().trim());
+                        newRoom.setRoomType(roomType.getText().toString().trim());
+                        mRoot.child(room.getText().toString().trim()).setValue(newRoom);
                         Toast.makeText(getBaseContext(), "Room Added Successfully", Toast.LENGTH_SHORT).show();
                         firebaseRecyclerAdapter.notifyDataSetChanged();
                         dialog.dismiss();
@@ -136,7 +141,9 @@ public class RoomActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(mContext, ChatRoom.class);
+            intent.putExtra("Room Name", mRoomName.getText().toString());
+            mContext.startActivity(intent);
         }
     }
 
