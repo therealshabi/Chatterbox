@@ -2,6 +2,7 @@ package therealshabi.technolifestyle.com.lapit;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -33,6 +34,7 @@ public class ChatRoom extends AppCompatActivity {
     EditText mMessage;
     ImageView mSend;
     LinearLayout mParent;
+    NestedScrollView scroller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ChatRoom extends AppCompatActivity {
         mParent = (LinearLayout) findViewById(R.id.parent);
         mMessage = (EditText) findViewById(R.id.ChatActivityMessage);
         mSend = (ImageView) findViewById(R.id.send);
+        scroller = (NestedScrollView) findViewById(R.id.scroller);
         mToolbar = (Toolbar) findViewById(R.id.ChatRoomActivityToolbar);
         setSupportActionBar(mToolbar);
 
@@ -71,6 +74,12 @@ public class ChatRoom extends AppCompatActivity {
 
                 message_root.updateChildren(message);
                 mMessage.setText("");
+                scroller.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroller.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                },100);
             }
         });
 
@@ -138,5 +147,38 @@ public class ChatRoom extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        scroller.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scroller.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        },100);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scroller.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scroller.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        },100);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        scroller.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scroller.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        },100);
     }
 }
