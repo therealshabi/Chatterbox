@@ -52,6 +52,13 @@ public class ChatRoom extends AppCompatActivity {
         SharedPreferences share = getSharedPreferences("Share_Chatterbox", MODE_PRIVATE);
         mUserName = share.getString("Name", null);
 
+        scroller.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scroller.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        },100);
+
         mRoot = FirebaseDatabase.getInstance().getReference().child("Rooms").child(mRoomName).child("Messages");
 
         Log.d("UserName", mUserName);
@@ -125,6 +132,12 @@ public class ChatRoom extends AppCompatActivity {
                 myMessage.setText(message);
                 myName.setText(user);
                 mParent.addView(v);
+                scroller.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroller.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                },100);
             } else {
                 View v = LayoutInflater.from(getApplicationContext()).inflate(getResources().getLayout(R.layout.others_message), null);
                 othersMessage = (TextView) v.findViewById(R.id.othersMessage);
@@ -132,6 +145,12 @@ public class ChatRoom extends AppCompatActivity {
                 othersMessage.setText(message);
                 othersName.setText(user);
                 mParent.addView(v);
+                scroller.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroller.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                },100);
             }
         }
 
